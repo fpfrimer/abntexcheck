@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
+
 import sys
 from pybtex.database.input import bibtex
+import re
 
 # Cores ANSI
 RED = "\033[31m"
@@ -45,6 +49,7 @@ def verifica_coerencia_abnt(entry):
     tipo = entry.type.lower()
     campos_faltando = []
     campos_recomendados_faltando = []
+    possivel_subtitulo = []
 
     if tipo in necessarios:
         campos = necessarios[tipo]
@@ -52,6 +57,9 @@ def verifica_coerencia_abnt(entry):
             if campo == 'author':
                 if 'author' not in entry.persons:
                     campos_faltando.append(campo)
+            elif campo == 'title':                
+                if re.search("[:–]", entry.fields['title']):
+                    possivel_subtitulo.append(campo)
             else:
                 if campo not in entry.fields:
                     campos_faltando.append(campo)
@@ -62,20 +70,22 @@ def verifica_coerencia_abnt(entry):
                 campos_recomendados_faltando.append(campo)
 
     else:
-        return campos_faltando, campos_recomendados_faltando
+        return campos_faltando, campos_recomendados_faltando, possivel_subtitulo
 
-    return campos_faltando, campos_recomendados_faltando
+    return campos_faltando, campos_recomendados_faltando, possivel_subtitulo
 
 def main(bibtex_file):
     parser = bibtex.Parser()
     bib_data = parser.parse_file(bibtex_file)
 
     for key, entry in bib_data.entries.items():
-        campos_faltando, campos_recomendados_faltando = verifica_coerencia_abnt(entry)
+        campos_faltando, campos_recomendados_faltando, possivel_subtitulo = verifica_coerencia_abnt(entry)
         if campos_faltando:
             print(f'Entrada {RED}{key}{RESET} não está coerente com a ABNT. Campos faltando: {RED}{", ".join(campos_faltando)}{RESET}')
         if campos_recomendados_faltando:
             print(f'Entrada {GREEN}{key}{RESET}: Recomendamos a inclusão dos seguintes campos: {GREEN}{", ".join(campos_recomendados_faltando)}{RESET}')
+        if possivel_subtitulo:
+            print(f'Entrada {YELLOW}{key}{RESET}: Subtítulo possivelmente incluído no campo: {YELLOW}{", ".join(possivel_subtitulo)}{RESET}')
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
