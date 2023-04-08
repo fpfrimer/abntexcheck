@@ -1,5 +1,7 @@
 # abntexcheck
 
+Versão v1.0.0-alfa
+
 # Sumário
 
 - [abntexcheck](#abntexcheck)
