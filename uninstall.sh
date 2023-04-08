@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define o destino do arquivo
 destino="/usr/local/bin/abntbibcheck"
