@@ -9,7 +9,7 @@ Descrição:
     possíveis melhorias ou correções a serem feitas.
 
 Autor:
-    Felipe Walter Dafico Pfrimer <fpfirmer@gmail.com>
+    Felipe Walter Dafico Pfrimer <https://github.com/fpfrimer/abntexcheck>
 
 Data de criação:
     07 de abril de 2023
@@ -24,6 +24,7 @@ Licença:
 import sys
 from pybtex.database.input import bibtex
 import re
+import argparse
 
 # Cores ANSI
 RED = "\033[31m"
@@ -121,7 +122,7 @@ def verifica_coerencia_abnt(entry):
 
     return campos_faltando, campos_recomendados_faltando, possivel_subtitulo, possivel_parentesco
 
-def main(bibtex_file):
+def main(bibtex_file, color_output):
     """
     A função principal do programa que analisa um arquivo BibTeX e verifica a coerência
     de suas entradas em relação às normas ABNT. Para cada entrada, a função verifica
@@ -131,6 +132,10 @@ def main(bibtex_file):
 
     :param bibtex_file: O caminho do arquivo BibTeX a ser analisado.
     """
+
+    if not color_output:
+        global RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, RESET
+        RED = GREEN = YELLOW = BLUE = MAGENTA = CYAN = RESET = ""
 
     # Cria um objeto Parser da biblioteca pybtex.database.input.bibtex. 
     # Este objeto é usado para analisar arquivos BibTeX e carregar suas 
@@ -156,8 +161,10 @@ def main(bibtex_file):
 
 # Executa a main
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Uso: python verificador_abnt.py <arquivo_bibtex>")
-        sys.exit(1)
-    bibtex_file = sys.argv[1]
-    main(bibtex_file)
+    parser = argparse.ArgumentParser(description="Verifica a coerência de um arquivo BibTeX em relação às normas ABNT.")
+    parser.add_argument("bibtex_file", help="O caminho do arquivo BibTeX a ser analisado.")
+    parser.add_argument("-c", "--color", action="store_true", help="Ativa a saída colorida (desativado por padrão).")
+
+    args = parser.parse_args()
+
+    main(args.bibtex_file, args.color)
