@@ -1,6 +1,7 @@
 # abntexcheck
 
 Versão v1.0.0-alpha
+**Nota**: Código criado com auxílio parcial de inteligencia artificial.
 
 # Sumário
 
