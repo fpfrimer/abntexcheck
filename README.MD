@@ -1,6 +1,6 @@
 # abntexcheck
 
-Versão v1.0.0-alfa
+Versão v1.0.0-alpha
 
 # Sumário
 
