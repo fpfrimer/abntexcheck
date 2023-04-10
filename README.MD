@@ -20,7 +20,7 @@ Versão v1.0.0-alpha
 
 O `abntexcheck` é uma ferramenta em Python para verificar a coerência das entradas BibTeX com as normas da ABNT (Associação Brasileira de Normas Técnicas). Ele analisa um arquivo BibTeX e informa campos obrigatórios e recomendados faltantes para cada entrada, ajudando os usuários a garantir que suas referências estejam de acordo com as diretrizes da ABNT.
 
-Também verifica se existem substítulos implícitos em títulos e a existem de nomes de parentesco como Neto, Filho e Júnior que não podem ser considerados como sobrenomes.
+Também verifica se existem substítulos implícitos em títulos e a existencia de nomes de parentesco como Neto, Filho e Júnior que não podem ser considerados como sobrenomes.
 
 ## Pré-requisitos
 
@@ -57,7 +57,7 @@ ou baixe diretamente como um arquivo ZIP e descompacte-o.
 cd abntexcheck
 ```
 
-3. xecute o script de instalação:
+3. Execute o script de instalação:
 
 ```bash
 ./install.sh
