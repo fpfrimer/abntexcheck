@@ -110,7 +110,7 @@ Siga os passos abaixo para instalar o abntexcheck no Windows:
 2. Instale as bibliotecas necessárias. Abra o Prompt de Comando (cmd) ou o PowerShell e execute o seguinte comando:
 
 ```bash
-pip install pybtex argparse re
+pip install pybtex argparse
 ```
 
 **Nota**: O comando pip pode ser diferente no seu sistema (como pip3), dependendo da instalação do Python.
